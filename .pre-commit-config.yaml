@@ -41,17 +41,16 @@ repos:
         entry: poetry run safety check
         language: system
         pass_filenames: false
-        args: ["--bare", "--ignore=49337"]
+        args:
+          [
+            "--bare",
+            "--ignore=44715",
+            "--ignore=44716",
+            "--ignore=44717",
+            "--ignore=49337",
+          ]
 
       # Jupyter, JupyterLab, Google Colab, and Databricks notebook checks
-      - id: nbstripout
-        name: nbstripout — strip out notebook metadata and outputs (auto-fix)
-        entry: poetry run nbstripout
-        language: system
-        types: [jupyter]
-        args:
-          - --extra-keys
-          - "metadata.colab metadata.kernelspec cell.metadata.colab cell.metadata.executionInfo cell.metadata.id cell.metadata.outputId cell.metadata.application/vnd.databricks.v1+cell metadata.application/vnd.databricks.v1+notebook metadata.interpreter"
       - id: nbqa-black
         name: nbqa-black — Python code formatting for notebooks (auto-fix)
         entry: poetry run nbqa black

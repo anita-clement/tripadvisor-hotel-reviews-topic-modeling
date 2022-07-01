@@ -34,6 +34,7 @@ this project locally:
   cd /path/to/tripadvisor-hotel-reviews-topic-modeling
   poetry install
   ```
+- Have your Kaggle API token in the location ~/.kaggle/kaggle.json
 
 [To use a specific Python version in your Poetry environment, please refer to this
 guidance][docs-specifying-python-version-for-poetry].
