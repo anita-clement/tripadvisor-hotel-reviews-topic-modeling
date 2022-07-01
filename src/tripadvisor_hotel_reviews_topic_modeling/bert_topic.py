@@ -51,8 +51,7 @@ class BERTopicLabel:
         """
         total_nb_reviews = len(self.review_label)
 
-        return f"""The total number of topics for the {self.label} reviews is
-        {self.nb_topic} for a total number of {total_nb_reviews} reviews."""
+        return f"""The total number of topics for the {self.label} reviews is {self.nb_topic} for a total number of {total_nb_reviews} reviews."""  # noqa: B950
 
     def get_topn_topic_info(self, n_topic: int) -> pd.DataFrame:
         """Get word information from the top n topics in terms of count.

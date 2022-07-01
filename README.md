@@ -1,6 +1,13 @@
 # Tripadvisor Hotel Reviews Topic Modeling
 
-A plain English description of this project.
+This project aims at detecting topics from negative and positive hotel reviews from Tripadvisor.
+
+The first part of the project consists in implementing BERTopic first introduced in this [paper](https://doi.org/10.48550/arXiv.2203.05794).
+The corresponding work main lies in the `notebooks` section as it is quite visual.
+
+The second part of the project [WIP] will consist in using transformers models for zero-shot learning.
+
+The last part [WIP] will attempt at doing some few-shot learning by manually labelling some instances.
 
 ## Getting started
 
@@ -15,8 +22,6 @@ environment][docs-set-ide], or activate it in your terminal.
 cd /path/to/tripadvisor-hotel-reviews-topic-modeling
 poetry shell
 ```
-
-A plain English description of how to use this project.
 
 [You can find more information about using this project in the user
 guide][docs-user-guide].
@@ -38,15 +43,6 @@ this project locally:
 
 [To use a specific Python version in your Poetry environment, please refer to this
 guidance][docs-specifying-python-version-for-poetry].
-
-### Requirements for running in the cloud
-
-A plain English description of how to run this project in the cloud.
-
-## Viewing documentation
-
-You can view this product's documentation at
-[`tripadvisor-hotel-reviews-topic-modeling.authed.rvu.cloud`][project-website]
 
 ## Contributing
 
