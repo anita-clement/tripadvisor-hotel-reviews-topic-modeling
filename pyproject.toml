@@ -1,0 +1,79 @@
+[tool.poetry]
+name = "tripadvisor-hotel-reviews-topic-modeling"
+version = "0.1.0"
+description = ""
+authors = ["RVU Data Science <data-science@rvu.co.uk>"]
+readme = "README.md"
+repository = "https://github.com/uswitch/tripadvisor-hotel-reviews-topic-modeling"
+documentation = "https://tripadvisor-hotel-reviews-topic-modeling.authed.rvu.cloud/"
+keywords = []
+classifiers = []
+packages = []
+include = []
+exclude = []
+
+[tool.poetry.dependencies]
+python = ">=3.9, <3.11"
+myst-parser = { version = "^0", optional = true }
+nox = { version = "^2021.6.12", optional = true }
+nox-poetry = { version = "^0", optional = true }
+pydata-sphinx-theme = { version = "^0", optional = true }
+sphinx-copybutton = { version = "^0", optional = true }
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+coverage = {extras = ["toml"], version = "^5.5"}
+cruft = "^2.9.0"
+detect-secrets = "^1.2.0"
+flake8 = "^3.9.2"
+flake8-bandit = "^3.0.0"
+flake8-bugbear = "^21.4.3"
+flake8-docstrings = "^1.6.0"
+flake8-rst-docstrings = "^0"
+isort = "^5.9.3"
+mypy = "^0"
+nbqa = "^1.1.0"
+nbstripout = "^0"
+pre-commit = "^2.15.0"
+pre-commit-hooks = "^4.0.1"
+pytest = "^6.2.5"
+pytest-cov = "^2.12.1"
+pytest-mock = "^3.6.1"
+pytest-xdist = "^2.3.0"
+safety = "^1.10.3"
+
+[tool.poetry.extras]
+all = ["myst-parser", "nox", "nox-poetry", "pydata-sphinx-theme", "sphinx-copybutton"]
+ci_cd = ["myst-parser", "nox", "nox-poetry", "pydata-sphinx-theme", "sphinx-copybutton"]
+nox = ["nox", "nox-poetry"]
+sphinx = ["myst-parser", "pydata-sphinx-theme", "sphinx-copybutton"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+strict = true
+pretty = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true
+
+[tool.pytest.ini_options]
+addopts = ["-vv", "--doctest-modules"]
+doctest_optionflags = "NORMALIZE_WHITESPACE"
+testpaths = ["src", "tests"]

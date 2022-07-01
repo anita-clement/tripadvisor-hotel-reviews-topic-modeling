@@ -1,0 +1,62 @@
+pipeline:
+  setup-poetry-environment:
+    when:
+      event: push
+    image: registry.usw.co/uswitch/rvu-data-science-containers-base-slim:latest
+    commands:
+      - poetry install --no-dev --no-root --no-interaction --extras "ci_cd"
+      - poetry install --no-dev --no-interaction --extras "ci_cd"
+
+  run-nox-sessions:
+    when:
+      event: push
+    image: registry.usw.co/uswitch/rvu-data-science-containers-base-slim:latest
+    commands:
+      - poetry run nox
+
+  generate-docs:
+    when:
+      event: push
+      branch: main
+    image: registry.usw.co/uswitch/rvu-data-science-containers-base-slim:latest
+    commands:
+      - poetry run sphinx-build -b html -W docs/ docs/_build
+
+  create-docs-image:
+    when:
+      event: push
+      branch: main
+    image: plugins/docker
+    repo: registry.usw.co/uswitch/tripadvisor-hotel-reviews-topic-modeling-docs
+    dockerfile: docs/Dockerfile
+    tags:
+      - latest
+      - "${DRONE_COMMIT}"
+
+  build-docs-kube:
+    when:
+      event: push
+      branch: main
+    image: lyft/kustomizer:v3.3.0
+    commands:
+      - cd k8s
+      - kustomize edit set image tripadvisor-hotel-reviews-topic-modeling-docs=registry.usw.co/uswitch/tripadvisor-hotel-reviews-topic-modeling-docs:${DRONE_COMMIT}
+      - cd ../
+      - kustomize build k8s > deploy.yaml
+      - cat deploy.yaml
+
+  deploy-docs-kube:
+    when:
+      event: push
+      branch: main
+    image: registry.usw.co/drone/deployment:latest
+    pull: true
+    tag: false
+    secrets: [KUBE_CLUSTERS]
+    kubernetes:
+      gomplate: "false"
+      template: [deploy.yaml]
+      namespace: data-science
+      timeout: 5m
+      clusters:
+        - eks-01

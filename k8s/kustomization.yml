@@ -1,0 +1,15 @@
+namespace: data-science
+
+commonLabels:
+  app: tripadvisor-hotel-reviews-topic-modeling-docs
+
+resources:
+  - deployment.yml
+  - service.yml
+  - ingress.yml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: tripadvisor-hotel-reviews-topic-modeling-docs
+    newName: registry.usw.co/uswitch/tripadvisor-hotel-reviews-topic-modeling-docs
+    newTag: latest

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripadvisor-hotel-reviews-topic-modeling
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: tripadvisor-hotel-reviews-topic-modeling

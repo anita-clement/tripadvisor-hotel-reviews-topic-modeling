@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripadvisor-hotel-reviews-topic-modeling
+spec:
+  template:
+    metadata:
+      annotations:
+        prometheus.io.scrape: "false"
+    spec:
+      containers:
+        - image: tripadvisor-hotel-reviews-topic-modeling-docs
+          imagePullPolicy: Always
+          name: tripadvisor-hotel-reviews-topic-modeling
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              cpu: "1"
+              memory: 256Mi
+      terminationGracePeriodSeconds: 60

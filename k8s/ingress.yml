@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tripadvisor-hotel-reviews-topic-modeling
+  annotations:
+    kubernetes.io/ingress.class: external-authenticated
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  rules:
+    - host: tripadvisor-hotel-reviews-topic-modeling.authed.rvu.cloud
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: tripadvisor-hotel-reviews-topic-modeling
+              servicePort: 80
